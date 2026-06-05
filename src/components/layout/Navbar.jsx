@@ -48,6 +48,7 @@ export default function Navbar() {
     { name: "HOME", href: "#" },
     { name: "ABOUT", href: "#about" },
     { name: "EVENTS", href: "#events" },
+    {name: "AGENDA", href: "#agenda" },
     { name: "GALLERY", href: "#gallery" }, 
     { name: "TEAM", href: "#team" },
     { name: "CONTACT", href: "#contact" },

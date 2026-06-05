@@ -2,10 +2,11 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import About from "@/components/sections/About";
 import Events from "@/components/sections/Events";
+import Agenda from "@/components/sections/Agenda";
 import Gallery from "@/components/sections/Gallery";
 import Team from "@/components/sections/Team";
 import Contact from "@/components/sections/Contact";
-import Agenda from "@/components/sections/Agenda";
+
 import { Terminal, ArrowRight, Code2, Cpu, CloudLightning } from "lucide-react";
 
 // Pre-calculated matrix to avoid hydration mismatch
