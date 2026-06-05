@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X, Hexagon, Cloud } from "lucide-react";
 
-// The Live Decryption/Scramble Effect Component - Smoothed and Slowed
+// The Live Decryption/Scramble Effect Component
 const ScrambleText = ({ text, className }) => {
   const [displayText, setDisplayText] = useState(text);
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0101";
@@ -23,8 +23,8 @@ const ScrambleText = ({ text, className }) => {
       if (iteration >= text.length) {
         clearInterval(interval);
       }
-      iteration += 1 / 3; // Reduced speed for smoother visual tracking
-    }, 40); // Slower interval timing
+      iteration += 1 / 3; 
+    }, 40); 
   };
 
   return (
@@ -44,12 +44,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
- const navLinks = [
+  const navLinks = [
     { name: "HOME", href: "#" },
     { name: "ABOUT", href: "#about" },
     { name: "EVENTS", href: "#events" },
-    {name: "AGENDA", href: "#agenda" },
-    { name: "GALLERY", href: "#gallery" }, 
+    { name: "AGENDA", href: "#agenda" },
+    { name: "GALLERY", href: "#gallery" },
     { name: "TEAM", href: "#team" },
     { name: "CONTACT", href: "#contact" },
   ];
@@ -65,11 +65,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           
+          {/* CUSTOM LOGO COMPONENT */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="bg-[#FF9900] text-black p-2.5 rounded-sm font-bold flex items-center justify-center group-hover:bg-white group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300">
-              <Terminal size={20} className="stroke-[2.5]" />
+            <div className="relative flex items-center justify-center p-2 rounded-sm bg-white/5 border border-white/10 group-hover:border-[#FF9900]/50 transition-colors duration-300">
+              <Hexagon size={26} className="text-[#FF9900] animate-[spin_10s_linear_infinite]" />
+              <Cloud size={12} className="absolute text-white" />
             </div>
-            <div className="flex flex-col justify-center cursor-crosshair">
+            
+            <div className="flex flex-col justify-center">
               <ScrambleText 
                 text="AWS BUILDER GROUP" 
                 className="font-mono font-bold text-lg text-white tracking-tight leading-none group-hover:text-[#FF9900] transition-colors"
@@ -80,12 +83,13 @@ export default function Navbar() {
             </div>
           </a>
 
+          {/* DESKTOP NAVIGATION (Removed cursor-crosshair) */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.href}
-                className={`relative py-2 text-xs font-mono tracking-widest transition-colors duration-300 group cursor-crosshair ${
+                className={`relative py-2 text-xs font-mono tracking-widest transition-colors duration-300 group ${
                   index === 0 ? "text-[#FF9900]" : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -111,10 +115,10 @@ export default function Navbar() {
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-
         </div>
       </div>
 
+      {/* MOBILE NAVIGATION */}
       {isOpen && (
         <div className="md:hidden bg-[#0B1120]/95 backdrop-blur-2xl border-b border-white/10 absolute w-full left-0 z-40">
           <div className="px-6 pt-4 pb-8 space-y-2">
