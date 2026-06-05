@@ -5,6 +5,7 @@ import Events from "@/components/sections/Events";
 import Gallery from "@/components/sections/Gallery";
 import Team from "@/components/sections/Team";
 import Contact from "@/components/sections/Contact";
+import Agenda from "@/components/sections/Agenda";
 import { Terminal, ArrowRight, Code2, Cpu, CloudLightning } from "lucide-react";
 
 // Pre-calculated matrix to avoid hydration mismatch
@@ -111,6 +112,7 @@ export default function Home() {
 
         <About />
         <Events />
+        <Agenda />
         <Gallery />
         <Team />
         <Contact />
