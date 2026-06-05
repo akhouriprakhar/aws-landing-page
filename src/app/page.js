@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import BadgeGenerator from "@/components/sections/BadgeGenerator";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import About from "@/components/sections/About";
@@ -163,6 +164,7 @@ export default function Home() {
         <FadeIn><Agenda /></FadeIn>
         <FadeIn><Gallery /></FadeIn>
         <FadeIn><Team /></FadeIn>
+        <FadeIn><BadgeGenerator /></FadeIn>
         <FadeIn><Contact /></FadeIn>
 
       </div>
