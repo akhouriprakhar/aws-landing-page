@@ -12,8 +12,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "AWS Builder Group | SSTC",
-  description: "Official landing page for the AWS Student Builder Group chapter.",
+  title: "AWS Builder Group | SSTC Chapter",
+  description: "Join the official AWS Student Builder Group at SSTC. We architect, deploy, and scale enterprise-grade cloud applications.",
+  keywords: ["AWS", "Student Builder Group", "SSTC", "Cloud Computing", "Hackathon", "Bhilai"],
+  openGraph: {
+    title: "AWS Builder Group | SSTC",
+    description: "Architect the Cloud Future with the SSTC AWS Builder Group.",
+    url: "https://your-domain.com", // Replace with your live Vercel URL later
+    siteName: "AWS Builder Group SSTC",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop", // A cool tech preview image
+        width: 1200,
+        height: 630,
+        alt: "AWS Builder Group SSTC Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AWS Builder Group | SSTC",
+    description: "Architect the Cloud Future with the SSTC AWS Builder Group.",
+    images: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop"],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -22,7 +45,6 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
-      {/* Changed to a deep dark background with custom selection color matching AWS Orange */}
       <body className="min-h-full flex flex-col bg-[#0B1120] text-slate-200 selection:bg-[#FF9900] selection:text-black">
         {children}
       </body>

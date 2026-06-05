@@ -16,11 +16,38 @@ export default function Contact() {
     e.preventDefault();
     setStatus("TRANSMITTING");
     
-    // Simulate network handshake/latency
-    setTimeout(() => {
-      setStatus("SUCCESS");
-      setFormData({ name: "", email: "", track: "cloud", payload: "" });
-    }, 1500);
+    // Web3Forms API Payload
+    const payload = {
+      access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE", // <-- Paste your key here!
+      name: formData.name,
+      email: formData.email,
+      track: formData.track,
+      message: formData.payload,
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus("SUCCESS");
+        setFormData({ name: "", email: "", track: "cloud", payload: "" });
+      } else {
+        setStatus("IDLE");
+        alert("Transmission Failed. Please try again.");
+      }
+    } catch (error) {
+      setStatus("IDLE");
+      alert("Network Error. Please check your connection.");
+    }
   };
 
   return (
