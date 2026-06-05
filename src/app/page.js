@@ -1,3 +1,6 @@
+"use client"; // enable client-side features
+
+import { useEffect, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import About from "@/components/sections/About";
@@ -6,10 +9,11 @@ import Agenda from "@/components/sections/Agenda";
 import Gallery from "@/components/sections/Gallery";
 import Team from "@/components/sections/Team";
 import Contact from "@/components/sections/Contact";
+import FadeIn from "@/components/ui/FadeIn";
 
 import { Terminal, ArrowRight, Code2, Cpu, CloudLightning } from "lucide-react";
 
-// Pre-calculated matrix to avoid hydration mismatch
+// Original Floating Symbols (keep exactly as before)
 const floatingConfigs = [
   { symbol: '{ }', left: 10, duration: 25, delay: 0, size: 24 },
   { symbol: '< />', left: 25, duration: 18, delay: 5, size: 16 },
@@ -45,78 +49,104 @@ const FloatingSymbols = () => (
 );
 
 export default function Home() {
+  // Cursor Tracking for Glow (new upgrade)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <>
       <Navbar />
 
-      <div className="bg-[#0B1120] min-h-screen">
-        
-        {/* --- 1. HERO SECTION --- */}
+      <div className="bg-[#0B1120] min-h-screen relative overflow-hidden">
+
+        {/* --- INTERACTIVE CURSOR GLOW --- */}
+        <div 
+          className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 153, 0, 0.04), transparent 40%)`
+          }}
+        />
+
+        {/* --- ORIGINAL FLOATING MATRIX --- */}
+        <FloatingSymbols />
+
+        {/* Core Depth Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF9900]/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+
+        {/* Masked Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_20%,transparent_100%)] z-0"></div>
+
+        {/* Tech Badges */}
+        <div className="absolute top-1/4 left-[15%] hidden lg:flex items-center gap-2 opacity-30 font-mono text-xs text-[#FF9900] border border-[#FF9900]/20 bg-[#FF9900]/5 px-3 py-1.5 rounded-sm backdrop-blur-sm animate-pulse z-0">
+          <Cpu size={14} /> {'[ EC2_COMPUTE ]'}
+        </div>
+        <div className="absolute bottom-1/3 right-[15%] hidden lg:flex items-center gap-2 opacity-30 font-mono text-xs text-blue-400 border border-blue-400/20 bg-blue-400/5 px-3 py-1.5 rounded-sm backdrop-blur-sm animate-[bounce_4s_infinite] z-0">
+          <CloudLightning size={14} /> {'< SERVERLESS_FN />'}
+        </div>
+
+        {/* --- HERO SECTION --- */}
         <main className="relative flex items-center justify-center overflow-hidden pt-32 pb-32">
-          
-          {/* Injecting the Floating Matrix here */}
-          <FloatingSymbols />
-
-          {/* Core Depth Effects - Central Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF9900]/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
-          
-          {/* Masked Grid - Fades out at the edges */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_20%,transparent_100%)] z-0"></div>
-
-          {/* Floating Tech Badges (Atmosphere) */}
-          <div className="absolute top-1/4 left-[15%] hidden lg:flex items-center gap-2 opacity-30 font-mono text-xs text-[#FF9900] border border-[#FF9900]/20 bg-[#FF9900]/5 px-3 py-1.5 rounded-sm backdrop-blur-sm animate-pulse z-0">
-            <Cpu size={14} /> {'[ EC2_COMPUTE ]'}
-          </div>
-          <div className="absolute bottom-1/3 right-[15%] hidden lg:flex items-center gap-2 opacity-30 font-mono text-xs text-blue-400 border border-blue-400/20 bg-blue-400/5 px-3 py-1.5 rounded-sm backdrop-blur-sm animate-[bounce_4s_infinite] z-0">
-            <CloudLightning size={14} /> {'< SERVERLESS_FN />'}
-          </div>
-
           <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-10">
             
-            <div className="flex items-center gap-3 mb-8 px-5 py-2 border border-[#FF9900]/40 bg-[#FF9900]/10 rounded-sm backdrop-blur-md shadow-[0_0_20px_rgba(255,153,0,0.15)] hover:bg-[#FF9900]/20 transition-colors cursor-default">
-              <Terminal size={16} className="text-[#FF9900]" />
-              <span className="font-mono text-[11px] tracking-[0.2em] text-[#FF9900] uppercase font-bold">
-                System Initialization Complete
-              </span>
-            </div>
+            {/* --- FadeIn Hero Content (upgrade) --- */}
+            <FadeIn delay={100}>
+              <div className="flex items-center gap-3 mb-8 px-5 py-2 border border-[#FF9900]/40 bg-[#FF9900]/10 rounded-sm backdrop-blur-md shadow-[0_0_20px_rgba(255,153,0,0.15)] hover:bg-[#FF9900]/20 transition-colors cursor-default">
+                <Terminal size={16} className="text-[#FF9900]" />
+                <span className="font-mono text-[11px] tracking-[0.2em] text-[#FF9900] uppercase font-bold">
+                  System Initialization Complete
+                </span>
+              </div>
+            </FadeIn>
 
-            <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 text-white drop-shadow-lg leading-tight">
-              Architect the <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9900] via-yellow-400 to-[#FF9900] bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
-                Cloud Future.
-              </span>
-            </h1>
+            <FadeIn delay={300}>
+              <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 text-white drop-shadow-lg leading-tight">
+                Architect the <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9900] via-yellow-400 to-[#FF9900] bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
+                  Cloud Future.
+                </span>
+              </h1>
+            </FadeIn>
             
-            <p className="text-base md:text-lg text-slate-400 max-w-2xl font-mono leading-relaxed mb-12 drop-shadow-md">
-              {'>'} We are the AWS Student Builder Group at SSTC. Join us to build, deploy, and scale enterprise-grade applications.
-            </p>
+            <FadeIn delay={500}>
+              <p className="text-base md:text-lg text-slate-400 max-w-2xl font-mono leading-relaxed mb-12 drop-shadow-md">
+                {'>'} We are the AWS Student Builder Group at SSTC. Join us to build, deploy, and scale enterprise-grade applications.
+              </p>
+            </FadeIn>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
-              <a 
-                href="#contact" 
-                className="group relative flex items-center justify-center gap-3 w-full sm:w-auto bg-[#FF9900] text-black px-8 py-4 rounded-sm font-mono tracking-widest font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300"
-              >
-                <Code2 size={18} className="stroke-[2.5]" />
-                <span>START_BUILDING</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              
-              <a 
-                href="#events" 
-                className="group flex items-center justify-center gap-3 w-full sm:w-auto bg-transparent border border-white/20 text-slate-300 px-8 py-4 rounded-sm font-mono tracking-widest font-bold hover:border-white hover:text-white hover:bg-white/5 transition-all duration-300"
-              >
-                <span>VIEW_EVENTS</span>
-              </a>
-            </div>
+            <FadeIn delay={700}>
+              <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+                <a 
+                  href="#contact" 
+                  className="group relative flex items-center justify-center gap-3 w-full sm:w-auto bg-[#FF9900] text-black px-8 py-4 rounded-sm font-mono tracking-widest font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300"
+                >
+                  <Code2 size={18} className="stroke-[2.5]" />
+                  <span>START_BUILDING</span>
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                
+                <a 
+                  href="#events" 
+                  className="group flex items-center justify-center gap-3 w-full sm:w-auto bg-transparent border border-white/20 text-slate-300 px-8 py-4 rounded-sm font-mono tracking-widest font-bold hover:border-white hover:text-white hover:bg-white/5 transition-all duration-300"
+                >
+                  <span>VIEW_EVENTS</span>
+                </a>
+              </div>
+            </FadeIn>
           </div>
         </main>
 
-        <About />
-        <Events />
-        <Agenda />
-        <Gallery />
-        <Team />
-        <Contact />
+        {/* --- PAGE SECTIONS WITH OPTIONAL FadeIn --- */}
+        <FadeIn><About /></FadeIn>
+        <FadeIn><Events /></FadeIn>
+        <FadeIn><Agenda /></FadeIn>
+        <FadeIn><Gallery /></FadeIn>
+        <FadeIn><Team /></FadeIn>
+        <FadeIn><Contact /></FadeIn>
 
       </div>
 

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "ev-01",
+    "time": "09:30 AM",
+    "duration": "30 MIN",
+    "title": "System Boot: Registration & Networking",
+    "type": "ONBOARDING",
+    "speaker": null
+  },
+  {
+    "id": "ev-02",
+    "time": "10:00 AM",
+    "duration": "45 MIN",
+    "title": "Keynote: Architecting for the Cloud",
+    "type": "KEYNOTE",
+    "speaker": {
+      "name": "Uddyan Sahu",
+      "role": "Chapter Lead",
+      "avatar": "https://ui-avatars.com/api/?name=Uddyan+Sahu&background=FF9900&color=000&size=128"
+    }
+  },
+  {
+    "id": "ev-03",
+    "time": "11:00 AM",
+    "duration": "90 MIN",
+    "title": "Live Sprint: Serverless Deployment",
+    "type": "WORKSHOP",
+    "speaker": {
+      "name": "Akhouri Prakhar",
+      "role": "Technical Lead",
+      "avatar": "https://ui-avatars.com/api/?name=Akhouri+Prakhar&background=1E293B&color=fff&size=128"
+    }
+  },
+  {
+    "id": "ev-04",
+    "time": "01:30 PM",
+    "duration": "60 MIN",
+    "title": "Panel: Landing Top-Tier Internships",
+    "type": "DISCUSSION",
+    "speaker": {
+      "name": "Guest Alumni",
+      "role": "Enterprise Engineers",
+      "avatar": "https://ui-avatars.com/api/?name=Guest+Alumni&background=1E293B&color=fff&size=128"
+    }
+  }
+]

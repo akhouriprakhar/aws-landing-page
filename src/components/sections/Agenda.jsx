@@ -1,56 +1,7 @@
 import { Clock, Mic, Terminal, ChevronRight } from "lucide-react";
+import agendaData from "@/data/agenda.json";
 
 export default function Agenda() {
-  // ---------------------------------------------------------
-  // THE JSON DATA: Udyyan or anyone can just update this array!
-  // ---------------------------------------------------------
-  const agendaJSON = [
-    {
-      id: "ev-01",
-      time: "09:30 AM",
-      duration: "30 MIN",
-      title: "System Boot: Registration & Networking",
-      type: "ONBOARDING",
-      speaker: null, // No speaker for onboarding
-    },
-    {
-      id: "ev-02",
-      time: "10:00 AM",
-      duration: "45 MIN",
-      title: "Keynote: Architecting for the Cloud",
-      type: "KEYNOTE",
-      speaker: {
-        name: "Uddyan Sahu",
-        role: "Chapter Lead",
-        avatar: "https://ui-avatars.com/api/?name=Uddyan+Sahu&background=FF9900&color=000&size=128",
-      }
-    },
-    {
-      id: "ev-03",
-      time: "11:00 AM",
-      duration: "90 MIN",
-      title: "Live Sprint: Serverless Deployment",
-      type: "WORKSHOP",
-      speaker: {
-        name: "Akhouri Prakhar",
-        role: "Technical Lead",
-        avatar: "https://ui-avatars.com/api/?name=Akhouri+Prakhar&background=1E293B&color=fff&size=128",
-      }
-    },
-    {
-      id: "ev-04",
-      time: "01:30 PM",
-      duration: "60 MIN",
-      title: "Panel: Landing Top-Tier Internships",
-      type: "DISCUSSION",
-      speaker: {
-        name: "Guest Alumni",
-        role: "Enterprise Engineers",
-        avatar: "https://ui-avatars.com/api/?name=Guest+Alumni&background=1E293B&color=fff&size=128",
-      }
-    }
-  ];
-
   return (
     <section id="agenda" className="relative py-24 z-10 max-w-5xl mx-auto px-6">
       
@@ -69,8 +20,9 @@ export default function Agenda() {
 
       {/* Dynamic JSON Rendering Wrapper */}
       <div className="space-y-4">
-        {/* Next.js .map() function dynamically reads the JSON above */}
-        {agendaJSON.map((item, index) => (
+        
+        {/* 2. WE MAP OVER THE IMPORTED JSON FILE DIRECTLY */}
+        {agendaData.map((item) => (
           <div 
             key={item.id}
             className="group relative bg-white/[0.02] border border-white/5 rounded-sm p-6 hover:border-[#FF9900]/40 hover:bg-white/[0.04] transition-all duration-300 flex flex-col md:flex-row gap-6 md:items-center"
@@ -102,7 +54,7 @@ export default function Agenda() {
               </h4>
             </div>
 
-            {/* Dynamic Speaker Details (Only renders if speaker data exists in the JSON) */}
+            {/* Dynamic Speaker Details */}
             {item.speaker && (
               <div className="flex items-center gap-4 bg-[#050810]/50 p-3 border border-white/5 rounded-sm md:min-w-[250px]">
                 <img 
